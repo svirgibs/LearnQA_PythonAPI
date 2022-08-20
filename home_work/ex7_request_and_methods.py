@@ -2,12 +2,17 @@ import requests
 
 url = "https://playground.learnqa.ru/ajax/api/compare_query_type"
 method_types = ['GET', 'POST', 'DELETE', 'HEAD', 'OPTIONS', 'PATCH', 'PUT']
+s_type = "Cочетание, когда реальный тип запроса не совпадает со значением параметра, " \
+         "но сервер отвечает так, словно все ок:"
+s_equal_type = "Типы совпадают, но сервер считает, что это не так"
+s_sep = '---------------------'
+s_sep_4 = "////////////////////////////////////////\n\nВопрос №4:"
 
 
 def print_text_and_status_code(obj):
     print(obj.text)
     print(obj.status_code)
-    print('---------------------')
+    print(s_sep)
 
 
 def do_all_req_types(method):
@@ -22,7 +27,6 @@ def do_all_req_types(method):
 
 
 if __name__ == '__main__':
-    """
     # Вопрос №1
     response1 = requests.get(url)
     print_text_and_status_code(response1)
@@ -34,19 +38,19 @@ if __name__ == '__main__':
     # Вопрос №3
     response3 = requests.get(url, params={"method": "GET"})
     print_text_and_status_code(response3)
-    print('////////////////////////////////////////')
-    """
+
+    print(s_sep_4)
+
     # Вопрос №4
     for method_type in method_types:
         responses_by_method = do_all_req_types(method_type)
         for obj in responses_by_method:
             if obj.request.method != method_type and obj.text == '{"success":"!"}':
-                print("Cочетание, когда реальный тип запроса не совпадает со значением параметра, "
-                      "но сервер отвечает так, словно все ок:")
+                print(s_type)
                 print("Real method: %s, Param: %s " % (obj.request.method, method_type))
                 print_text_and_status_code(obj)
             elif obj.request.method == method_type and obj.status_code != 200:
-                print("Типы совпадают, но сервер считает, что это не так")
+                print(s_equal_type)
                 print("Real method: %s, Param: %s " % (obj.request.method, method_type))
                 print_text_and_status_code(obj)
 

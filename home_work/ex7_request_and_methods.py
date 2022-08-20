@@ -7,6 +7,7 @@ s_type = "Cочетание, когда реальный тип запроса �
 s_equal_type = "Типы совпадают, но сервер считает, что это не так"
 s_sep = '---------------------'
 s_sep_4 = "////////////////////////////////////////\n\nВопрос №4:"
+real_method_and_param = "Real method: %s, Params: %s "
 
 
 def print_text_and_status_code(obj):
@@ -47,11 +48,11 @@ if __name__ == '__main__':
         for obj in responses_by_method:
             if obj.request.method != method_type and obj.text == '{"success":"!"}':
                 print(s_type)
-                print("Real method: %s, Param: %s " % (obj.request.method, method_type))
+                print(real_method_and_param % (obj.request.method, method_type))
                 print_text_and_status_code(obj)
             elif obj.request.method == method_type and obj.status_code != 200:
                 print(s_equal_type)
-                print("Real method: %s, Param: %s " % (obj.request.method, method_type))
+                print(real_method_and_param % (obj.request.method, method_type))
                 print_text_and_status_code(obj)
 
 

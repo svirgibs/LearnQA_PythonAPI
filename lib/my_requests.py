@@ -1,5 +1,6 @@
 import requests
 
+
 class MyRequests:
     @staticmethod
     def post(url: str, data: dict = None, headers: dict = None, cookies: dict = None):

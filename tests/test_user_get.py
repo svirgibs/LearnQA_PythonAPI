@@ -25,9 +25,6 @@ class TestUserGet(BaseCase):
         response2 = requests.get(f"https://playground.learnqa.ru/api/user/{user_id_from_auth_method}",
                                  headers={"x-csrf-token": token},
                                  cookies={"auth_sid": auth_sid})
-        Assertions.assert_json_has_key(response2, "username")
-        Assertions.assert_json_has_key(response2, "email")
-        Assertions.assert_json_has_key(response2, "firstName")
-        Assertions.assert_json_has_key(response2, "lastName")
 
-        # 03 Просмотр пользователя, 7:00
+        expected_fields = ["username", "email", "firstName", "lastName"]
+        Assertions.assert_json_has_keys(response2, expected_fields)

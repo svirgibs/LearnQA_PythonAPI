@@ -37,7 +37,6 @@ class TestUserEdit(BaseCase):
         # GET
         response4 = MyRequests.get(f"/user/{user_id}",
                                    headers={"x-csrf-token": token},
-                                   cookies={"auth_sid": auth_sid},
-                                   data={"firstName": new_name})
+                                   cookies={"auth_sid": auth_sid})
         Assertions.assert_json_value_by_name(response4, "firstName", new_name,
                                              "Wrong name of the user after edit")

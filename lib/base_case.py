@@ -1,4 +1,7 @@
 import json
+import random
+import string
+
 from requests import Response
 from datetime import datetime
 
@@ -35,3 +38,10 @@ class BaseCase:
             'lastName': 'learnqa',
             'email': email
         }
+
+    @staticmethod
+    def generate_too_long_username():
+        too_long_username = ''
+        for char in range(251):
+            too_long_username += random.choice(string.ascii_letters)
+        return too_long_username

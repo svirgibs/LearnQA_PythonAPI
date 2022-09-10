@@ -1,10 +1,12 @@
 import datetime
 import os
 from requests import Response
+from environment import ENV_OBJECT
 
 
 class Logger:
-    file_name = f"logs/log_" + str(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")) + ".log"
+    file_name = f"{ENV_OBJECT.get_root()}/logs/log_" + str(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")) + \
+                ".log"
 
     @classmethod
     def _write_log_to_file(cls, data: str):

@@ -22,5 +22,8 @@ class Environment:
         else:
             raise Exception(f"Unknown value of ENV variable {self.env}")
 
+    def get_root(self):
+        return os.path.dirname(os.path.abspath(__file__))
+
 
 ENV_OBJECT = Environment()
